@@ -36,7 +36,9 @@ jobs:
       - name: Install system dependencies for Cypress
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgconf-2-4
+          sudo apt-get install -y wget gdebi-core libgtk-3-0 libnss3 libxss1 libasound2 libatk-bridge2.0-0 libdrm2 libgbm1 libxshmfence1
+          wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gconf/libgconf-2-4_3.2.6-7ubuntu1_amd64.deb
+          sudo gdebi -n libgconf-2-4_3.2.6-7ubuntu1_amd64.deb
 
       - name: Install dependencies
         run: |
