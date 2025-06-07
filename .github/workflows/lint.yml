@@ -1,5 +1,8 @@
 name: Lint
-on: [push, pull_request]
+
+on:
+  push:
+  pull_request:
 
 jobs:
   lint:
@@ -22,5 +25,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Run linter
-        run: npx --no-install jshint@2.12.0 .
+      - name: Run JSHint Linter
+        run: |
+          npx --no-install jshint@2.12.0 .

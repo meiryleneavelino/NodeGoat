@@ -1,5 +1,8 @@
 name: E2E Test
-on: [push, pull_request]
+
+on:
+  push:
+  pull_request:
 
 jobs:
   e2e-test:
@@ -18,7 +21,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
