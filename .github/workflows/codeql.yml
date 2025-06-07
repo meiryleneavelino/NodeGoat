@@ -5,12 +5,11 @@ on:
     branches: [main]
   pull_request:
    branches: [main]
-  schedule:
-    - cron: '0 0 * * 0'
+
 
 jobs:
   analyze:
-    name: Analyze
+    name: Analyze with CodeQL
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -22,16 +21,24 @@ jobs:
         language: ['javascript']
     
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Initialize CodeQL
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Initialize CodeQl
         uses: github/codeql-action/init@v3
         with:
-          languages: ${{matrix.language}}
+          languages: ${{ matrix.language }}
+      - name: Build project
+        run: echo "No build step needed for Node.js"
 
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
-
-      - name: Perform CodeQL Analysis
+      - name: Run CodeQl Analysis
         uses: github/codeql-action/analyze@v3
+
